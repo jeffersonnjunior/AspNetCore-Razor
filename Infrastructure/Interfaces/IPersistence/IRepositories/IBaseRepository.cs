@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Interfaces.IRepositories;
+﻿namespace Infrastructure.Interfaces.IPersistence.IRepositories;
 
 public interface IBaseRepository
 {
