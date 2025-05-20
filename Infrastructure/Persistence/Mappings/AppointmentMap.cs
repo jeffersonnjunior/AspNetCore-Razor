@@ -9,23 +9,16 @@ public class AppointmentMap : IEntityTypeConfiguration<Appointment>
 {
     public void Configure(EntityTypeBuilder<Appointment> builder)
     {
-        builder.ToTable("Appointments");
-
-        // Chave primária
         builder.HasKey(a => a.Id);
 
-        // Relacionamentos
         builder.HasOne(a => a.Patient)
             .WithMany()
-            .HasForeignKey(a => a.PatientId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(a => a.PatientId);
 
         builder.HasOne(a => a.Doctor)
             .WithMany()
-            .HasForeignKey(a => a.DoctorId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(a => a.DoctorId);
 
-        // Configurações das propriedades
         builder.Property(a => a.AppointmentDateTime)
             .IsRequired()
             .HasColumnType("datetime2");
@@ -41,7 +34,6 @@ public class AppointmentMap : IEntityTypeConfiguration<Appointment>
                 v => (AppointmentStatus)Enum.Parse(typeof(AppointmentStatus), v))
             .HasMaxLength(20);
 
-        // Índices
         builder.HasIndex(a => a.PatientId);
         builder.HasIndex(a => a.DoctorId);
         builder.HasIndex(a => a.AppointmentDateTime);
