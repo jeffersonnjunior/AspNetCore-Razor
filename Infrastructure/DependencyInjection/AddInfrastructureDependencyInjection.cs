@@ -8,5 +8,6 @@ public static class AddInfrastructureDependencyInjection
     public static void DependencyInjectionInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.PersistenceDependencyInjection(configuration);
+        services.CacheDependencyInjection(configuration);
     }
 }
