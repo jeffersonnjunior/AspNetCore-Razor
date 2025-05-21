@@ -1,11 +1,14 @@
-﻿namespace Infrastructure.Interfaces.IPersistence.IRepositories;
+﻿using System.Linq.Expressions;
 
-public interface IBaseRepository
+namespace Infrastructure.Interfaces.IPersistence.IRepositories;
+
+public interface IBaseRepository<T> where T : class
 {
-    IQueryable<T> Query<T>() where T : class;
-    T? Find<T>(Guid id) where T : class;
-    T Add<T>(T entity) where T : class;
-    void Update<T>(T entity) where T : class;
-    void Delete<T>(T entity) where T : class;
-    void SaveChanges();
+    Task<T> GetByIdAsync(Guid id);
+    Task<IEnumerable<T>> GetAllAsync();
+    Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+    Task AddAsync(T entity);
+    Task UpdateAsync(T entity);
+    Task RemoveAsync(T entity);
+    Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate);
 }

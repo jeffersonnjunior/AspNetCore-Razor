@@ -1,46 +1,42 @@
 ﻿using Infrastructure.Interfaces.IPersistence.IRepositories;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Persistence.Repositories;
 
-public class BaseRepository : IBaseRepository
+public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 {
-    private readonly AppDbContext _context;
+    protected readonly AppDbContext _context;
+    protected readonly DbSet<T> _dbSet;
 
-    public BaseRepository(AppDbContext context)
+    protected BaseRepository(AppDbContext context)
     {
         _context = context;
+        _dbSet = context.Set<T>();
     }
 
-    public T Add<T>(T entity) where T : class
+    public async Task<T> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
+
+    public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+
+    public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) =>
+        await _dbSet.Where(predicate).ToListAsync();
+
+    public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+
+    public async Task UpdateAsync(T entity)
     {
-        _context.Set<T>().Add(entity);
-        return entity;
+        _dbSet.Update(entity);
+        await Task.CompletedTask;
     }
 
-    public void Delete<T>(T entity) where T : class
+    public async Task RemoveAsync(T entity)
     {
-        _context.Set<T>().Remove(entity);
+        _dbSet.Remove(entity);
+        await Task.CompletedTask;
     }
 
-    public T? Find<T>(Guid id) where T : class
-    {
-        return _context.Set<T>().Find(id);
-    }
-
-    public IQueryable<T> Query<T>() where T : class
-    {
-        return _context.Set<T>().AsQueryable();
-    }
-
-    public void SaveChanges()
-    {
-        _context.SaveChanges();
-    }
-
-    public void Update<T>(T entity) where T : class
-    {
-        _context.Set<T>().Update(entity);
-    }
+    public async Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate) =>
+        await _dbSet.AnyAsync(predicate);
 }
