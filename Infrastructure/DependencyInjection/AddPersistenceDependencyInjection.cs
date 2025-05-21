@@ -19,6 +19,8 @@ public static class AddPersistenceDependencyInjection
             options.EnableSensitiveDataLogging();
         });
 
+        services.RepositorysDependencyInjection();
+
         return services;
     }
 }
