@@ -1,5 +1,7 @@
-﻿namespace Application.Services;
+﻿using Application.Interfaces.IServices;
 
-public interface DoctorServices
+namespace Application.Services;
+
+public class DoctorServices : IDoctorServices
 {
 }
