@@ -28,7 +28,7 @@ public class ExamDocumentMap : IEntityTypeConfiguration<ExamDocument>
 
         builder.Property(e => e.ExamDate)
             .IsRequired()
-            .HasColumnType("datetime2");
+            .HasColumnType("timestamp");
 
         builder.Property(e => e.FilePath)
             .IsRequired()

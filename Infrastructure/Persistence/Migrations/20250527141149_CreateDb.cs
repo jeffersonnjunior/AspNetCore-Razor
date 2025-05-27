@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Infrastructure.Persistence.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDataBase : Migration
+    public partial class CreateDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,7 +61,7 @@ namespace Infrastructure.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     PatientId = table.Column<Guid>(type: "uuid", nullable: false),
                     DoctorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    AppointmentDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AppointmentDateTime = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Notes = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     Status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
@@ -88,7 +88,7 @@ namespace Infrastructure.Persistence.Migrations
                     PatientId = table.Column<Guid>(type: "uuid", nullable: false),
                     ExamName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     ExamType = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExamDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     FilePath = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
@@ -109,7 +109,7 @@ namespace Infrastructure.Persistence.Migrations
                     PatientId = table.Column<Guid>(type: "uuid", nullable: false),
                     DocumentType = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
-                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    IssueDate = table.Column<DateTime>(type: "timestamp", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -129,7 +129,7 @@ namespace Infrastructure.Persistence.Migrations
                     PatientId = table.Column<Guid>(type: "uuid", nullable: false),
                     VaccineName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Manufacturer = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    AdministrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AdministrationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     LotNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>

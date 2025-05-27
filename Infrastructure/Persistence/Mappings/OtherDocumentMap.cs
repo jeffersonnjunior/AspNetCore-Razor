@@ -28,7 +28,7 @@ public class OtherDocumentMap : IEntityTypeConfiguration<OtherDocument>
 
         builder.Property(o => o.IssueDate)
             .IsRequired()
-            .HasColumnType("datetime2");
+            .HasColumnType("timestamp");
 
         builder.HasIndex(o => o.PatientId);
         builder.HasIndex(o => o.IssueDate);

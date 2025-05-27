@@ -10,7 +10,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d healthrecords"]
+      test: ["CMD-SHELL", "PGPASSWORD=root pg_isready -U postgres -d healthrecords"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -34,13 +34,16 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=root;Host=postgres;Port=5432;Database=healthrecords;
     volumes:
       - .:/src
     working_dir: /src
     command: >
       sh -c "
       echo 'Aguardando PostgreSQL...';
-      until pg_isready -h postgres -U postgres -d healthrecords; do sleep 2; done;
+      until PGPASSWORD=root pg_isready -h postgres -U postgres -d healthrecords; do sleep 2; done;
       echo 'Aplicando migrations...';
       dotnet ef database update --project Infrastructure --startup-project WebUI --verbose
       "
@@ -58,7 +61,7 @@ services:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: "User ID=postgres;Password=root;Server=postgres;Port=5432;Database=healthrecords;Pooling=true;"
+      ConnectionStrings__DefaultConnection: "User ID=postgres;Password=root;Host=postgres;Port=5432;Database=healthrecords;Pooling=true;"
       ConnectionStrings__Redis: "redis:6379"
 
 volumes:

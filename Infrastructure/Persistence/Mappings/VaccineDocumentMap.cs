@@ -28,7 +28,7 @@ public class VaccineDocumentMap : IEntityTypeConfiguration<VaccineDocument>
 
         builder.Property(v => v.AdministrationDate)
             .IsRequired()
-            .HasColumnType("datetime2");
+            .HasColumnType("timestamp");
 
         builder.Property(v => v.LotNumber)
             .IsRequired()

@@ -21,7 +21,7 @@ public class AppointmentMap : IEntityTypeConfiguration<Appointment>
 
         builder.Property(a => a.AppointmentDateTime)
             .IsRequired()
-            .HasColumnType("datetime2");
+            .HasColumnType("timestamp");
 
         builder.Property(a => a.Notes)
             .HasMaxLength(1000)

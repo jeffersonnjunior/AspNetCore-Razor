@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Persistence.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250520173536_CreateDataBase")]
-    partial class CreateDataBase
+    [Migration("20250527171556_UpdateField")]
+    partial class UpdateField
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AppointmentDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp");
 
                     b.Property<Guid>("DoctorId")
                         .HasColumnType("uuid");
@@ -85,7 +85,7 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ExamDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp");    
 
                     b.Property<string>("ExamName")
                         .IsRequired()
@@ -152,7 +152,7 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(200)");
 
                     b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp");
 
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uuid");
@@ -198,7 +198,7 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AdministrationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("LotNumber")
                         .IsRequired()
