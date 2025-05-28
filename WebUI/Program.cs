@@ -1,3 +1,4 @@
+using Application.DependencyInjection;
 using Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,8 @@ builder.WebHost.ConfigureKestrel(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddRazorPages();
+builder.Services.DependencyInjectionApplication(configuration);
 builder.Services.DependencyInjectionInfrastructure(configuration);
 
 

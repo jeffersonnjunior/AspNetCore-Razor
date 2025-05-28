@@ -1,0 +1,50 @@
+﻿@page
+@model WebUI.Pages.Appointments.CreateModel
+@{
+    ViewData["Title"] = "Novo Agendamento";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="CreateDto.PatientId" class="control-label">ID do Paciente</label>
+        <input asp-for="CreateDto.PatientId" class="form-control" />
+        <span asp-validation-for="CreateDto.PatientId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateDto.DoctorId" class="control-label">ID do Médico</label>
+        <input asp-for="CreateDto.DoctorId" class="form-control" />
+        <span asp-validation-for="CreateDto.DoctorId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateDto.AppointmentDateTime" class="control-label">Data/Hora</label>
+        <input asp-for="CreateDto.AppointmentDateTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="CreateDto.AppointmentDateTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateDto.Notes" class="control-label">Observações</label>
+        <textarea asp-for="CreateDto.Notes" class="form-control"></textarea>
+        <span asp-validation-for="CreateDto.Notes" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateDto.Status" class="control-label">Status</label>
+        <select asp-for="CreateDto.Status" class="form-control">
+            @foreach (var status in Model.StatusOptions)
+            {
+                <option value="@status">@status</option>
+            }
+        </select>
+        <span asp-validation-for="CreateDto.Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Criar Agendamento</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
