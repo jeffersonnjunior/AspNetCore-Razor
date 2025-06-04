@@ -10,12 +10,10 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     if (isRunningInContainer)
     {
-
         options.ListenAnyIP(5000);
     }
     else
     {
-
         options.ListenAnyIP(5001, listenOptions =>
         {
             listenOptions.UseHttps();
@@ -23,17 +21,29 @@ builder.WebHost.ConfigureKestrel(options =>
     }
 });
 
-
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddRazorPages();
+
 builder.Services.DependencyInjectionApplication(configuration);
 builder.Services.DependencyInjectionInfrastructure(configuration);
 
-
 var app = builder.Build();
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles(); 
+
+app.UseRouting();
 
 app.UseAuthorization();
-app.MapControllers();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();
