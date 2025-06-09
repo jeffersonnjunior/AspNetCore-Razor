@@ -22,6 +22,7 @@ builder.WebHost.ConfigureKestrel(options =>
 });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages(); 
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.DependencyInjectionApplication(configuration);
@@ -36,7 +37,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(); 
+app.UseStaticFiles();
 
 app.UseRouting();
 
@@ -45,5 +46,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages(); 
 
 app.Run();
