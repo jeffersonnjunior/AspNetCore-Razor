@@ -9,5 +9,6 @@ public static class AddInfrastructureDependencyInjection
     {
         services.PersistenceDependencyInjection(configuration);
         services.CacheDependencyInjection(configuration);
+        services.ExceptionsDependencyInjection();
     }
 }
