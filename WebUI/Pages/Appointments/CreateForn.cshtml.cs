@@ -1,5 +1,5 @@
 using Application.Dtos.AppointmentDtos;
-using Application.Interfaces.IServices;
+using Application.Interfaces.IDecorators;
 using Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,11 +9,11 @@ namespace WebUI.Pages.Appointments;
 
 public class CreateModel : PageModel
 {
-    private readonly IAppointmentServices _appointmentService;
+    private readonly IAppointmentDecorator _appointmentDecorator;
 
-    public CreateModel(IAppointmentServices appointmentService)
+    public CreateModel(IAppointmentDecorator appointmentDecorator)
     {
-        _appointmentService = appointmentService;
+        _appointmentDecorator = appointmentDecorator;
     }
 
     [BindProperty]
@@ -35,7 +35,7 @@ public class CreateModel : PageModel
 
         try
         {
-            _appointmentService.Add(Dto);
+            _appointmentDecorator.Add(Dto);
             return RedirectToPage("/Success");
         }
         catch (ValidationException ex)
