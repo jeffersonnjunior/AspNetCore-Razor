@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class CreateDb : Migration
@@ -12,16 +12,18 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Doctor",
+                name: "Patient",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Document = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Doctor", x => x.Id);
+                    table.PrimaryKey("PK_Patient", x => x.Id);
                 });
+
 
             migrationBuilder.CreateTable(
                 name: "MedicalSpecialty",
@@ -42,16 +44,35 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patient",
+                name: "Doctor",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Document = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patient", x => x.Id);
+                    table.PrimaryKey("PK_Doctor", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Doctor",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("11111111-1111-1111-1111-111111111111"), "Dr. Alice" },
+                    { new Guid("22222222-2222-2222-2222-222222222222"), "Dr. Bob" },
+                    { new Guid("33333333-3333-3333-3333-333333333333"), "Dr. Carol" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Patient",
+                columns: new[] { "Id", "Name", "Document" },
+                values: new object[,]
+                {
+                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "John Doe", "12345678901" },
+                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "Jane Smith", "23456789012" },
+                    { new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc"), "Carlos Silva", "34567890123" }
                 });
 
             migrationBuilder.CreateTable(

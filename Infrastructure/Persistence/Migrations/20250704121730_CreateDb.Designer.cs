@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250527171556_UpdateField")]
-    partial class UpdateField
+    [Migration("20250704121730_CreateDb")]
+    partial class CreateDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ExamDate")
-                        .HasColumnType("timestamp");    
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("ExamName")
                         .IsRequired()
