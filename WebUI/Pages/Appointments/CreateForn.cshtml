@@ -2,9 +2,8 @@
 @model WebUI.Pages.Appointments.CreateModel
 @{
     ViewData["Title"] = "Novo Agendamento";
-    Layout = "_Layout"; // <-- ESSENCIAL para aplicar layout e a section Scripts funcionar
+    Layout = "_Layout";
 }
-
 
 <link rel="stylesheet" href="~/css/site.css" />
 
@@ -55,80 +54,43 @@
     </div>
 </form>
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
         console.log("Script foi carregado!");
 
         function loadNames(handler, selectId) {
-            // URL corrigida para Razor Pages
-        const url = `/Appointments/CreateForn?handler=${handler}`;
-                    console.log("Solicitando URL:", url);
+            const url = `/Appointments/CreateForn?handler=${handler}`;
+            const select = document.getElementById(selectId);
+            const currentValue = select.value;
+
+            while (select.options.length > 1) {
+                select.remove(1);
+            }
 
             fetch(url)
-                .then(response => {
-                    console.log("Resposta recebida. Status:", response.status);
-
-                    if (!response.ok) {
-                        console.error("Erro na resposta:", response.statusText);
-                        throw new Error(`Erro HTTP! status: ${response.status}`);
-                    }
-
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(names => {
-                    console.log("Dados recebidos:", names);
-
-                    if (!Array.isArray(names)) {
-                        console.error("Dados não são um array:", typeof names);
-                        throw new Error("Resposta inválida: não é um array");
-                    }
-
-                    const select = document.getElementById(selectId);
-                    console.log(`Select encontrado: ${selectId}`, select);
-
-                    // Preserva a seleção atual
-                    const currentValue = select.value;
-
-                    // Limpa as opções exceto a primeira
-                    while (select.options.length > 1) {
-                        select.remove(1);
-                    }
-
-                    // Adiciona novas opções
                     names.forEach(name => {
-                        console.log(`Adicionando opção: ${name}`);
                         const option = new Option(name, name);
                         select.appendChild(option);
                     });
 
-                    // Restaura seleção anterior se possível
                     if (currentValue && [...select.options].some(o => o.value === currentValue)) {
                         select.value = currentValue;
                     }
-                })
-                .catch(error => {
-                    console.error("Erro completo:", error);
-                    alert(`Erro ao carregar ${handler}: ${error.message}`);
                 });
         }
 
-        // Carrega automaticamente ao iniciar
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOM carregado - Iniciando carregamento");
-
+        document.addEventListener('DOMContentLoaded', function () {
             loadNames('PatientsNames', 'patientSelect');
             loadNames('DoctorsNames', 'doctorSelect');
 
-            // Mantém o carregamento sob demanda
-            document.getElementById('patientSelect').addEventListener('focus', function() {
-                console.log("Foco no select de pacientes");
+            document.getElementById('patientSelect').addEventListener('focus', function () {
                 loadNames('PatientsNames', 'patientSelect');
             });
 
-            document.getElementById('doctorSelect').addEventListener('focus', function() {
-                console.log("Foco no select de médicos");
+            document.getElementById('doctorSelect').addEventListener('focus', function () {
                 loadNames('DoctorsNames', 'doctorSelect');
             });
         });
