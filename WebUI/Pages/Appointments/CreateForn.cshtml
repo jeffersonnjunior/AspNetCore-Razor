@@ -2,7 +2,9 @@
 @model WebUI.Pages.Appointments.CreateModel
 @{
     ViewData["Title"] = "Novo Agendamento";
+    Layout = "_Layout"; // <-- ESSENCIAL para aplicar layout e a section Scripts funcionar
 }
+
 
 <link rel="stylesheet" href="~/css/site.css" />
 
@@ -11,44 +13,124 @@
         <h2>@ViewData["Title"]</h2>
 
         <div class="form-group">
-            <label asp-for="CreateDto.PatientId" class="control-label">ID do Paciente</label>
-            <input asp-for="CreateDto.PatientId" class="form-control" />
-            <span asp-validation-for="CreateDto.PatientId" class="text-danger"></span>
+            <label asp-for="Dto.PatientName" class="control-label">Paciente</label>
+            <select asp-for="Dto.PatientName" class="form-control" id="patientSelect" name="Dto.PatientName">
+                <option value="">Selecione um paciente</option>
+            </select>
+            <span asp-validation-for="Dto.PatientName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="CreateDto.DoctorId" class="control-label">ID do Médico</label>
-            <input asp-for="CreateDto.DoctorId" class="form-control" />
-            <span asp-validation-for="CreateDto.DoctorId" class="text-danger"></span>
+            <label asp-for="Dto.DoctorName" class="control-label">Médico</label>
+            <select asp-for="Dto.DoctorName" class="form-control" id="doctorSelect" name="Dto.DoctorName">
+                <option value="">Selecione um médico</option>
+            </select>
+            <span asp-validation-for="Dto.DoctorName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="CreateDto.AppointmentDateTime" class="control-label">Data/Hora</label>
-            <input asp-for="CreateDto.AppointmentDateTime" type="datetime-local" class="form-control" />
-            <span asp-validation-for="CreateDto.AppointmentDateTime" class="text-danger"></span>
+            <label asp-for="Dto.AppointmentDateTime" class="control-label">Data/Hora</label>
+            <input asp-for="Dto.AppointmentDateTime" type="datetime-local" class="form-control" />
+            <span asp-validation-for="Dto.AppointmentDateTime" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="CreateDto.Notes" class="control-label">Observações</label>
-            <textarea asp-for="CreateDto.Notes" class="form-control"></textarea>
-            <span asp-validation-for="CreateDto.Notes" class="text-danger"></span>
+            <label asp-for="Dto.Notes" class="control-label">Observações</label>
+            <textarea asp-for="Dto.Notes" class="form-control"></textarea>
+            <span asp-validation-for="Dto.Notes" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="CreateDto.Status" class="control-label">Status</label>
-            <select asp-for="CreateDto.Status" class="form-control">
+            <label asp-for="Dto.Status" class="control-label">Status</label>
+            <select asp-for="Dto.Status" class="form-control">
                 @foreach (var status in Model.StatusOptions)
                 {
                     <option value="@status">@status</option>
                 }
             </select>
-            <span asp-validation-for="CreateDto.Status" class="text-danger"></span>
+            <span asp-validation-for="Dto.Status" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Criar Agendamento</button>
     </div>
 </form>
 
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        console.log("Script foi carregado!");
+
+        function loadNames(handler, selectId) {
+            // URL corrigida para Razor Pages
+        const url = `/Appointments/CreateForn?handler=${handler}`;
+                    console.log("Solicitando URL:", url);
+
+            fetch(url)
+                .then(response => {
+                    console.log("Resposta recebida. Status:", response.status);
+
+                    if (!response.ok) {
+                        console.error("Erro na resposta:", response.statusText);
+                        throw new Error(`Erro HTTP! status: ${response.status}`);
+                    }
+
+                    return response.json();
+                })
+                .then(names => {
+                    console.log("Dados recebidos:", names);
+
+                    if (!Array.isArray(names)) {
+                        console.error("Dados não são um array:", typeof names);
+                        throw new Error("Resposta inválida: não é um array");
+                    }
+
+                    const select = document.getElementById(selectId);
+                    console.log(`Select encontrado: ${selectId}`, select);
+
+                    // Preserva a seleção atual
+                    const currentValue = select.value;
+
+                    // Limpa as opções exceto a primeira
+                    while (select.options.length > 1) {
+                        select.remove(1);
+                    }
+
+                    // Adiciona novas opções
+                    names.forEach(name => {
+                        console.log(`Adicionando opção: ${name}`);
+                        const option = new Option(name, name);
+                        select.appendChild(option);
+                    });
+
+                    // Restaura seleção anterior se possível
+                    if (currentValue && [...select.options].some(o => o.value === currentValue)) {
+                        select.value = currentValue;
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro completo:", error);
+                    alert(`Erro ao carregar ${handler}: ${error.message}`);
+                });
+        }
+
+        // Carrega automaticamente ao iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM carregado - Iniciando carregamento");
+
+            loadNames('PatientsNames', 'patientSelect');
+            loadNames('DoctorsNames', 'doctorSelect');
+
+            // Mantém o carregamento sob demanda
+            document.getElementById('patientSelect').addEventListener('focus', function() {
+                console.log("Foco no select de pacientes");
+                loadNames('PatientsNames', 'patientSelect');
+            });
+
+            document.getElementById('doctorSelect').addEventListener('focus', function() {
+                console.log("Foco no select de médicos");
+                loadNames('DoctorsNames', 'doctorSelect');
+            });
+        });
+    </script>
 }

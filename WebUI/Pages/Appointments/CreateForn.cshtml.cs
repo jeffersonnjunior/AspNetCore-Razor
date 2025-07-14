@@ -1,6 +1,7 @@
 using Application.Dtos.AppointmentDtos;
 using Application.Interfaces.IDecorators;
 using Domain.Enums;
+using Infrastructure.Persistence.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -10,10 +11,12 @@ namespace WebUI.Pages.Appointments;
 public class CreateModel : PageModel
 {
     private readonly IAppointmentDecorator _appointmentDecorator;
+    private readonly AppDbContext _context;
 
-    public CreateModel(IAppointmentDecorator appointmentDecorator)
+    public CreateModel(IAppointmentDecorator appointmentDecorator, AppDbContext context)
     {
         _appointmentDecorator = appointmentDecorator;
+        _context = context;
     }
 
     [BindProperty]
@@ -23,7 +26,6 @@ public class CreateModel : PageModel
 
     public void OnGet()
     {
-        // Página de carregamento inicial
     }
 
     public IActionResult OnPost()
@@ -43,5 +45,21 @@ public class CreateModel : PageModel
             ModelState.AddModelError(string.Empty, ex.Message);
             return Page();
         }
+    }
+
+    public JsonResult OnGetPatientsNames()
+    {
+        var names = _context.Set<Domain.Entities.Patient>()
+            .Select(p => p.Name)
+            .ToList();
+        return new JsonResult(names);
+    }
+
+    public JsonResult OnGetDoctorsNames()
+    {
+        var names = _context.Set<Domain.Entities.Doctor>()
+            .Select(d => d.Name)
+            .ToList();
+        return new JsonResult(names);
     }
 }

@@ -22,17 +22,17 @@ public class AppointmentDecorator : IAppointmentDecorator
     {
         bool isValid = true;
 
-        if (dto.PatientId == Guid.Empty)
-        {
-            _notificationContext.AddNotification("O campo 'Paciente' é obrigatório.");
-            isValid = false;
-        }
+        //if (dto.PatientId == Guid.Empty)
+        //{
+        //    _notificationContext.AddNotification("O campo 'Paciente' é obrigatório.");
+        //    isValid = false;
+        //}
 
-        if (dto.DoctorId == Guid.Empty)
-        {
-            _notificationContext.AddNotification("O campo 'Médico' é obrigatório.");
-            isValid = false;
-        }
+        //if (dto.DoctorId == Guid.Empty)
+        //{
+        //    _notificationContext.AddNotification("O campo 'Médico' é obrigatório.");
+        //    isValid = false;
+        //}
 
         if (dto.AppointmentDateTime == default(DateTime) || dto.AppointmentDateTime < DateTime.Now)
         {
