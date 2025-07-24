@@ -1,0 +1,32 @@
+﻿@model Application.Dtos.VaccineDocumentDtos.VaccineDocumentCreateDto
+
+<h2>Nova Vacinação</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="VaccineName"></label>
+        <input asp-for="VaccineName" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Manufacturer"></label>
+        <input asp-for="Manufacturer" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="AdministrationDate"></label>
+        <input asp-for="AdministrationDate" type="date" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="LotNumber"></label>
+        <input asp-for="LotNumber" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="PatientId"></label>
+        <input asp-for="PatientId" class="form-control" />
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
