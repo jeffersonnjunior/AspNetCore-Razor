@@ -1,32 +1,47 @@
 ﻿@model Application.Dtos.VaccineDocumentDtos.VaccineDocumentCreateDto
 
-<h2>Nova Vacinação</h2>
+@{
+    ViewData["Title"] = "Nova Vacinação";
+}
 
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="VaccineName"></label>
+<h2 class="mb-4">@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post" class="card p-4 shadow-sm bg-light">
+    <div class="mb-3">
+        <label asp-for="VaccineName" class="form-label fw-semibold"></label>
         <input asp-for="VaccineName" class="form-control" />
+        <span asp-validation-for="VaccineName" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="Manufacturer"></label>
+    <div class="mb-3">
+        <label asp-for="Manufacturer" class="form-label fw-semibold"></label>
         <input asp-for="Manufacturer" class="form-control" />
+        <span asp-validation-for="Manufacturer" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="AdministrationDate"></label>
+    <div class="mb-3">
+        <label asp-for="AdministrationDate" class="form-label fw-semibold"></label>
         <input asp-for="AdministrationDate" type="date" class="form-control" />
+        <span asp-validation-for="AdministrationDate" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="LotNumber"></label>
+    <div class="mb-3">
+        <label asp-for="LotNumber" class="form-label fw-semibold"></label>
         <input asp-for="LotNumber" class="form-control" />
+        <span asp-validation-for="LotNumber" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="PatientId"></label>
+    <div class="mb-3">
+        <label asp-for="PatientId" class="form-label fw-semibold"></label>
         <input asp-for="PatientId" class="form-control" />
+        <span asp-validation-for="PatientId" class="text-danger"></span>
     </div>
 
-    <button type="submit">Salvar</button>
+    <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
