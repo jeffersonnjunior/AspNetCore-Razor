@@ -60,9 +60,9 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("11111111-1111-1111-1111-111111111111"), "Dr. Alice" },
-                    { new Guid("22222222-2222-2222-2222-222222222222"), "Dr. Bob" },
-                    { new Guid("33333333-3333-3333-3333-333333333333"), "Dr. Carol" }
+        { Guid.NewGuid(), "Dr. Alice" },
+        { Guid.NewGuid(), "Dr. Bob" },
+        { Guid.NewGuid(), "Dr. Carol" }
                 });
 
             migrationBuilder.InsertData(
@@ -70,9 +70,9 @@ namespace Infrastructure.Persistence.Migrations
                 columns: new[] { "Id", "Name", "Document" },
                 values: new object[,]
                 {
-                    { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "John Doe", "12345678901" },
-                    { new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"), "Jane Smith", "23456789012" },
-                    { new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc"), "Carlos Silva", "34567890123" }
+        { Guid.NewGuid(), "John Doe", "12345678901" },
+        { Guid.NewGuid(), "Jane Smith", "23456789012" },
+        { Guid.NewGuid(), "Carlos Silva", "34567890123" }
                 });
 
             migrationBuilder.CreateTable(

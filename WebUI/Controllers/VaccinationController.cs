@@ -23,4 +23,11 @@ public class VaccinationController : Controller
         _vaccineDocumentDecorator.Add(dto);
         return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> SearchPatients()
+    {
+        var result = await _vaccineDocumentDecorator.SearchPatientsAsync();
+        return Json(result);
+    }
 }

@@ -33,9 +33,13 @@
 
     <div class="mb-3">
         <label asp-for="PatientId" class="form-label fw-semibold"></label>
-        <input asp-for="PatientId" class="form-control" />
+        <select asp-for="PatientId" class="form-control" id="patient-autocomplete">
+            <option value="">Selecione um paciente</option>
+        </select>
         <span asp-validation-for="PatientId" class="text-danger"></span>
     </div>
+
+
 
     <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -44,4 +48,20 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: '/Vaccination/SearchPatients',
+                success: function (data) {
+                    var $select = $("#patient-autocomplete");
+                    $select.empty();
+                    $select.append('<option value="">Selecione um paciente</option>');
+                    data.forEach(function (patient) {
+                        $select.append('<option value="' + patient.id + '">' + patient.name + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
 }
