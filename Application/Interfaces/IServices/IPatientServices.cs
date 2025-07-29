@@ -4,5 +4,5 @@ namespace Application.Interfaces.IServices;
 
 public interface IPatientServices
 {
-    Task<List<Patient>> GetPatients();
+    Task<List<Patient>> GetPatientsList();
 }

@@ -10,7 +10,7 @@ public class PatientRepository : BaseRepository<Patient>, IPatientRepository
     public PatientRepository(AppDbContext context) : base(context)
     {
     }
-    public async Task<List<Patient>> GetPatients()
+    public async Task<List<Patient>> GetPatientsList()
     {
         return await _context.Set<Patient>()
             .ToListAsync();

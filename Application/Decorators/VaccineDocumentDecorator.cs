@@ -1,4 +1,5 @@
-﻿using Application.Dtos.VaccineDocumentDtos;
+﻿using Application.Dtos.PatientDtos;
+using Application.Dtos.VaccineDocumentDtos;
 using Application.Interfaces.IDecorators;
 using Application.Interfaces.IFactories;
 using Application.Interfaces.IServices;
@@ -27,8 +28,8 @@ public class VaccineDocumentDecorator : IVaccineDocumentDecorator
         _vaccineDocumentServices.Add(vaccineDocument);
     }
 
-    public async Task<IEnumerable<object>> SearchPatientsAsync()
+    public async Task<List<PatientReadDto>> SearchPatientsAsync()
     {
-       return await _patientDecorator.GetPatientsNamesAsync();
+        return await _patientDecorator.GetPatientsList();
     }
 }

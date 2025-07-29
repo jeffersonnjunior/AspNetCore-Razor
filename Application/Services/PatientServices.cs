@@ -12,7 +12,7 @@ public class PatientServices : IPatientServices
     {
         _patientRepository = patientRepository;
     }
-    public async Task<List<Patient>> GetPatients()
+    public async Task<List<Patient>> GetPatientsList()
     {
         var patients = await _patientRepository.GetPatients();
         return patients;
