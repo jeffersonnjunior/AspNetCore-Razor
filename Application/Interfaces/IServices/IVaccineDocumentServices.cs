@@ -1,9 +1,9 @@
-﻿using Application.Dtos.VaccineDocumentDtos;
-using Domain.Entities;
+﻿using Domain.Entities;
 
 namespace Application.Interfaces.IServices;
 
 public interface IVaccineDocumentServices
 {
-    void Add(VaccineDocument dto);
+    Task Add(VaccineDocument dto);
+    Task<List<VaccineDocument>> GetVaccineDocumentsList();
 }

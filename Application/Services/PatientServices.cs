@@ -14,7 +14,7 @@ public class PatientServices : IPatientServices
     }
     public async Task<List<Patient>> GetPatientsList()
     {
-        var patients = await _patientRepository.GetPatients();
+        var patients = await _patientRepository.GetPatientsList();
         return patients;
     }
 }

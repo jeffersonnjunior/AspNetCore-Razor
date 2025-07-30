@@ -22,10 +22,10 @@ public class VaccineDocumentDecorator : IVaccineDocumentDecorator
         _patientDecorator = patientDecorator;
     }
 
-    public void Add(VaccineDocumentCreateDto dto)
+    public async Task Add(VaccineDocumentCreateDto dto)
     {
         VaccineDocument vaccineDocument = _vaccineDocumentFactory.MapToVaccineDocument(dto);
-        _vaccineDocumentServices.Add(vaccineDocument);
+        await _vaccineDocumentServices.Add(vaccineDocument);
     }
 
     public async Task<List<PatientReadDto>> SearchPatientsAsync()

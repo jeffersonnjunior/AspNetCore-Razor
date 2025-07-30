@@ -12,8 +12,14 @@ public class VaccineDocumentServices : IVaccineDocumentServices
         _vaccineDocumentRepository = vaccineDocumentRepository;
     }
 
-    public void Add(VaccineDocument dto)
+    public async Task Add(VaccineDocument dto)
     {
-        _vaccineDocumentRepository.AddAsync(dto);
+        await _vaccineDocumentRepository.AddAsync(dto);
+    }
+
+    public async Task<List<VaccineDocument>> GetVaccineDocumentsList()
+    {
+        var documents = await _vaccineDocumentRepository.GetAllVaccineDocumentsAsync();
+        return documents.ToList();
     }
 }
