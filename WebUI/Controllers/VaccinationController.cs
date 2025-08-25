@@ -28,24 +28,8 @@ public class VaccinationController : Controller
     [HttpPost]
     public IActionResult Create(VaccineDocumentCreateDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            _logger.LogWarning("ModelState inválido ao criar vacinação.");
-            return View(dto);
-        }
-
-        try
-        {
-            _vaccineDocumentDecorator.Add(dto);
-            _logger.LogInformation("Vacinação criada com sucesso para paciente {PatientId}", dto.PatientId);
-            return RedirectToAction("Index");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Erro ao criar vacinação.");
-            ModelState.AddModelError("", "Erro ao salvar: " + ex.Message);
-            return View(dto);
-        }
+        _vaccineDocumentDecorator.Add(dto);
+        return RedirectToAction("Index");
     }
 
     [HttpGet]
@@ -53,13 +37,5 @@ public class VaccinationController : Controller
     {
         var result = await _vaccineDocumentDecorator.SearchPatientsAsync();
         return Json(result);
-    }
-
-    [HttpGet]
-    [Route("DevTools")]
-    public async Task<IActionResult> DevTools()
-    {
-        var documents = await _vaccineDocumentServices.GetVaccineDocumentsList();
-        return Json(documents);
     }
 }
