@@ -72,3 +72,20 @@ h2 {
 .container {
     max-width: 100%;
 }
+
+/* Sidebar link custom */
+.sidebar-link {
+    text-decoration: none !important;
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: background 0.2s;
+    color: #212529;
+    display: inline-block;
+}
+.sidebar-link:hover,
+.sidebar-link:focus,
+.sidebar-link.active {
+    background: #e2e6ea; /* Um pouco mais escuro que o bg-light */
+    color: #212529;
+    outline: none;
+}

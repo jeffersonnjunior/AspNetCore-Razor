@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebUI.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6QJQwQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -25,7 +25,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <!-- Botão removido do cabeçalho -->
-
                     </ul>
                 </div>
             </div>
@@ -35,16 +34,14 @@
     <div id="sidebar" class="bg-light border-end position-fixed h-100" style="width: 250px; left: 0; top: 0; z-index: 1040;">
         <div class="d-flex flex-column p-3 h-100">
             <h5 class="mb-4">Menu</h5>
-            <a class="sidebar-link mb-2 d-flex align-items-center gap-2" asp-controller="Vaccination" asp-action="Create">
+            <a class="sidebar-link mb-2 d-flex align-items-center gap-2 @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Vaccination" ? "active" : "")"
+               asp-controller="Vaccination" asp-action="Create">
                 <i class="fa-solid fa-syringe fa-lg"></i>
                 Vacinar Paciente
             </a>
             <!-- Adicione outros itens da barra lateral aqui -->
         </div>
     </div>
-
-
-
     <div class="container" style="margin-left:260px;">
         <div class="d-flex justify-content-end align-items-center my-4">
             <!-- Ícone pequeno para Nova Vacinação -->
@@ -54,13 +51,11 @@
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>
             </a>
-            </a>
         </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <script>
         function openSidebar() {
             document.getElementById('sidebar').style.left = '0';
@@ -69,7 +64,6 @@
             document.getElementById('sidebar').style.left = '-250px';
         }
     </script>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
