@@ -19,6 +19,11 @@ public class VaccinationController : Controller
         _logger = logger;
     }
 
+    public IActionResult Index()
+    {
+        return View();
+    }
+
     public IActionResult Create()
     {
         var dto = new VaccineDocumentCreateDto();

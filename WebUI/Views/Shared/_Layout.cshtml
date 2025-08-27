@@ -24,27 +24,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <!-- Botão removido do cabeçalho -->
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <!-- Sidebar -->
     <div id="sidebar" class="bg-light border-end position-fixed h-100" style="width: 250px; left: 0; top: 0; z-index: 1040;">
         <div class="d-flex flex-column p-3 h-100">
             <h5 class="mb-4">Menu</h5>
-            <a class="sidebar-link mb-2 d-flex align-items-center gap-2 @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Vaccination" ? "active" : "")"
-               asp-controller="Vaccination" asp-action="Create">
+            <a class="sidebar-link mb-2 d-flex align-items-center gap-2 @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Vaccination" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")"
+               asp-controller="Vaccination" asp-action="Index">
                 <i class="fa-solid fa-syringe fa-lg"></i>
-                Vacinar Paciente
+                Vacinas
             </a>
-            <!-- Adicione outros itens da barra lateral aqui -->
         </div>
     </div>
     <div class="container" style="margin-left:260px;">
         <div class="d-flex justify-content-end align-items-center my-4">
-            <!-- Ícone pequeno para Nova Vacinação -->
             <a asp-controller="Vaccination" asp-action="Create" title="Nova Vacinação" class="me-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0d6efd" class="bi bi-plus-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
