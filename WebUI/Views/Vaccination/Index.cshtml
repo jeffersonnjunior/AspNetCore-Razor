@@ -2,16 +2,53 @@
     ViewData["Title"] = "Vacinas";
 }
 
+<style>
+    .add-card {
+        min-width: 160px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+        background: #fff;
+        transition: box-shadow 0.2s, background 0.2s;
+        cursor: pointer;
+        padding: 0 24px;
+    }
+    .add-card:hover {
+        background: #e3eafc;
+        box-shadow: 0 4px 16px rgba(13,110,253,0.15);
+    }
+    .add-card .fa-syringe {
+        color: #0d6efd;
+        font-size: 2.5rem;
+        transition: color 0.2s;
+    }
+    .add-card:hover .fa-syringe {
+        color: #2563eb;
+    }
+    .add-card-text {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #34495e;
+        transition: color 0.2s;
+    }
+    .add-card:hover .add-card-text {
+        color: #2563eb;
+    }
+</style>
+
 <div class="container mt-5">
     <h2 class="mb-4">Vacinas</h2>
-    <div class="mb-3">
-        <a asp-controller="Vaccination" asp-action="Create" class="btn btn-success d-flex align-items-center gap-2">
-            <i class="fa-solid fa-plus"></i>
-            Nova Vacinação
+    <div class="mb-3 d-flex">
+        <a asp-controller="Vaccination" asp-action="Create" title="Nova Vacinação" class="add-card">
+            <i class="fa-solid fa-syringe"></i>
+            <span class="add-card-text">Adicionar Vacina</span>
         </a>
     </div>
     <div>
-        <!-- Aqui você pode listar as vacinas, adicionar links para editar, excluir, etc. -->
         <p>Funcionalidades relacionadas a vacinas aparecerão aqui.</p>
     </div>
 </div>
