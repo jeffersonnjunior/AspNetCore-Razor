@@ -5,101 +5,137 @@
 }
 
 <style>
-    .form-horizontal {
-        margin: 40px 0 0 32px;
-        max-width: 700px;
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0;
+        background-color: #f8f9fa;
     }
-    .form-horizontal h2 {
-        font-weight: 700;
-        color: #2563eb;
-        margin-bottom: 32px;
-        font-size: 1.5rem;
-        text-align: left;
+
+    .main-flex {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 0;
+        margin-top: 8px;
     }
-    .form-row {
+
+    .info-card {
+        max-width: 600px;
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+        background: #fff;
+        border: 1px solid #e3eafc;
+        overflow: hidden;
+    }
+
+    .info-row {
         display: flex;
         align-items: center;
-        margin-bottom: 18px;
-        gap: 18px;
+        justify-content: space-between;
+        padding: 18px 24px;
+        border-bottom: 1px solid #e3eafc;
     }
-    .form-label {
-        min-width: 160px;
-        font-weight: 500;
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: 600;
         color: #34495e;
         font-size: 1rem;
-        margin-bottom: 0;
+        margin-bottom: 4px;
     }
-    .form-control {
-        border-radius: 8px;
-        padding: 0.6rem 1rem;
-        border: 1px solid #ced4da;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        background: #fff;
-        font-size: 1rem;
-        flex: 1;
+
+    .info-value {
+        color: #212529;
+        font-size: 1.08rem;
+        font-weight: 400;
+        word-break: break-word;
     }
-    .form-control:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 8px rgba(37,99,235,0.10);
-        background: #f8fafc;
-    }
-    .text-danger {
-        font-size: 0.95rem;
-        margin-left: 10px;
-    }
+
     .btn-primary {
-        padding: 0.7rem 2rem;
+        min-width: 120px;
+        padding: 0.5rem 1.2rem;
         border-radius: 8px;
         font-weight: 600;
         background: linear-gradient(90deg, #2563eb 80%, #0d6efd 100%);
         border: none;
         box-shadow: 0 2px 8px rgba(13,110,253,0.10);
         transition: background 0.2s;
-        font-size: 1.08rem;
-        margin-top: 16px;
+        font-size: 1rem;
+        display: inline-block;
+        margin-top: 0;
     }
+
     .btn-primary:hover {
         background: linear-gradient(90deg, #0d6efd 80%, #2563eb 100%);
     }
+
+    .select-patient {
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        border: 1px solid #ced4da;
+        background: #f8fafc;
+        font-size: 1rem;
+        color: #212529;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .select-patient:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 8px rgba(37,99,235,0.10);
+        background: #fff;
+    }
 </style>
 
-<div class="form-horizontal">
-    <h2>@ViewData["Title"]</h2>
-    <form asp-action="Create" method="post">
-        <div class="form-row">
-            <label asp-for="VaccineName" class="form-label"></label>
-            <input asp-for="VaccineName" class="form-control" />
-            <span asp-validation-for="VaccineName" class="text-danger"></span>
-        </div>
-
-        <div class="form-row">
-            <label asp-for="Manufacturer" class="form-label"></label>
-            <input asp-for="Manufacturer" class="form-control" />
-            <span asp-validation-for="Manufacturer" class="text-danger"></span>
-        </div>
-
-        <div class="form-row">
-            <label asp-for="AdministrationDate" class="form-label"></label>
-            <input asp-for="AdministrationDate" type="date" class="form-control" />
-            <span asp-validation-for="AdministrationDate" class="text-danger"></span>
-        </div>
-
-        <div class="form-row">
-            <label asp-for="LotNumber" class="form-label"></label>
-            <input asp-for="LotNumber" class="form-control" />
-            <span asp-validation-for="LotNumber" class="text-danger"></span>
-        </div>
-
-        <div class="form-row">
-            <label asp-for="PatientId" class="form-label"></label>
-            <select asp-for="PatientId" class="form-control" id="patient-autocomplete">
-                <option value="">Selecione um paciente</option>
-            </select>
-            <span asp-validation-for="PatientId" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
+<div class="main-flex">
+    <div class="info-card">
+        <form asp-action="Create" method="post" id="form1">
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Nome da Vacina</div>
+                    <input asp-for="VaccineName" class="info-value form-control-plaintext" style="padding-left:0;" />
+                </div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Fabricante</div>
+                    <input asp-for="Manufacturer" class="info-value form-control-plaintext" style="padding-left:0;" />
+                </div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Data de Aplicação</div>
+                    <input asp-for="AdministrationDate" type="date" class="info-value form-control-plaintext" style="padding-left:0;" id="dataAplicacao" />
+                </div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Lote</div>
+                    <input asp-for="LotNumber" class="info-value form-control-plaintext" style="padding-left:0;" />
+                </div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <div class="info-label">Paciente</div>
+                    <select asp-for="PatientId" class="select-patient" id="patient-autocomplete">
+                        <option value="">Selecione um paciente</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <button type="submit" form="form1" class="btn btn-primary" style="margin-top: 12px;">
+        Salvar
+    </button>
 </div>
 
 @section Scripts {
@@ -118,6 +154,9 @@
                     });
                 }
             });
+
+            var hoje = new Date().toISOString().split('T')[0];
+            $('#dataAplicacao').val(hoje);
         });
     </script>
 }
