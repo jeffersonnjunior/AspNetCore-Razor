@@ -14,7 +14,7 @@ public class VaccineCardModel : PageModel
         _pdfService = pdfService;
     }
 
-    // Adicione outras propriedades necessárias para o modelo
+    // Adicione outras propriedades necessï¿½rias para o modelo
 
     [BindProperty]
     public string HtmlContent { get; set; } = string.Empty;
@@ -26,7 +26,7 @@ public class VaccineCardModel : PageModel
 
     public async Task<IActionResult> OnGetGeneratePdfAsync()
     {
-        var pdfBytes = await _pdfService.GeneratePdfFromPageUrlAsync("https://localhost:5000/Pdfs/VaccineCard");
+        var pdfBytes = await _pdfService.GeneratePdfFromPageUrlAsync("http://localhost:5000/Pdfs/VaccineCard");
         return File(pdfBytes, "application/pdf", "VaccineCard.pdf");
     }
 }
