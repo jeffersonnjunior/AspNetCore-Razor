@@ -1,0 +1,92 @@
+﻿@page
+@model WebUI.Pages.Pdfs.VaccineCardModel
+@{
+}
+
+<style>
+    .vaccine-card-container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: #f8fafc;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(44,62,80,0.07);
+        padding: 32px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .vaccine-card-header {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+        .vaccine-card-header h2 {
+            color: #2563eb;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+    .vaccine-card-info {
+        margin-bottom: 18px;
+        font-size: 1.1rem;
+        color: #212529;
+    }
+
+    .vaccine-card-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 12px;
+    }
+
+        .vaccine-card-table th, .vaccine-card-table td {
+            border-bottom: 1px solid #e3eafc;
+            padding: 8px 6px;
+            text-align: left;
+        }
+
+        .vaccine-card-table th {
+            background: #e3eafc;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .vaccine-card-table td {
+            color: #212529;
+        }
+</style>
+
+<div class="vaccine-card-container">
+    <div class="vaccine-card-header">
+        <h2>Carteira de Vacinação</h2>
+        <div>Nome: <strong>João da Silva</strong></div>
+        <div>Documento: <strong>123.456.789-00</strong></div>
+    </div>
+    <table class="vaccine-card-table">
+        <thead>
+            <tr>
+                <th>Vacina</th>
+                <th>Data</th>
+                <th>Lote</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hepatite B</td>
+                <td>01/05/2024</td>
+                <td>L1234</td>
+            </tr>
+            <tr>
+                <td>COVID-19</td>
+                <td>15/06/2024</td>
+                <td>L5678</td>
+            </tr>
+            <tr>
+                <td>Febre Amarela</td>
+                <td>20/07/2024</td>
+                <td>L91011</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="text-align:right; font-size:0.95rem; color:#888;">
+        Emitido em: 01/09/2025
+    </div>
+</div>

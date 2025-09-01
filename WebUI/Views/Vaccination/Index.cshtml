@@ -59,7 +59,7 @@
                 vacina
             </span>
         </a>
-        <a asp-controller="Vaccination" asp-action="Print" title="Imprimir Vacinas" class="add-card">
+        <a asp-page="/Pdfs/VaccineCard" asp-page-handler="GeneratePdf" title="Imprimir Vacinas" class="add-card">
             <i class="fa-solid fa-print"></i>
             <span class="add-card-text">
                 Imprimir<br>

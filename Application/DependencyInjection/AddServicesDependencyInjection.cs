@@ -8,6 +8,7 @@ public static class AddServicesDependencyInjection
 {
     public static void ServicesDependencyInjection(this IServiceCollection service)
     {
+        service.AddScoped<IGeneratePdfService, GeneratePdfService>();
         service.AddScoped<IPatientServices, PatientServices>();
         service.AddScoped<IVaccineDocumentServices, VaccineDocumentServices>();
     }
