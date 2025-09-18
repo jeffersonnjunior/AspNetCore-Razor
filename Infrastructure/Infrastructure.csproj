@@ -10,4 +10,8 @@
     <PackageReference Include="PuppeteerSharp" Version="20.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pdf\RazorRenderer\" />
+  </ItemGroup>
+
 </Project>

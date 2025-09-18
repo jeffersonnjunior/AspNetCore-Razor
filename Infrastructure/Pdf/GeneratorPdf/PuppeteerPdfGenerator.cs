@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Interfaces.IPdf;
 using PuppeteerSharp;
 
-namespace Infrastructure.Pdf;
+namespace Infrastructure.Pdf.GeneratorPdf;
 
 public class PuppeteerPdfGenerator : IPdfGenerator
 {

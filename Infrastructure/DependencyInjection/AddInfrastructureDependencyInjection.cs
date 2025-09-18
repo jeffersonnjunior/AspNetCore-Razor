@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Interfaces.IPdf;
-using Infrastructure.Pdf;
+using Infrastructure.Pdf.GeneratorPdf;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.DependencyInjection;
