@@ -6,3 +6,5 @@
 /WebUI/obj
 /.vs/AspNetCore-Razor
 /Core/obj
+/Infrastructure/obj
+/Infrastructure/bin/Debug/net8.0
