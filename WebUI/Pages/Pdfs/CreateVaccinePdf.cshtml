@@ -126,16 +126,20 @@
             padding-top: 15px;
         }
         
-        @media print {
+        @@media print {
             body {
                 margin: 0;
             }
+
             .header {
                 page-break-after: avoid;
             }
+
             .vaccines-table {
                 page-break-inside: avoid;
             }
+        }
+
         }
     </style>
 </head>
