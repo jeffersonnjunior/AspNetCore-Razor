@@ -24,6 +24,13 @@
                 </a>
             </li>
             <li>
+                <a asp-area="" asp-controller="Vaccine" asp-action="Index" 
+                   class="sidebar-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Vaccine" ? "active" : "")">
+                    <i class="fas fa-syringe"></i>
+                    <span>Vacinas</span>
+                </a>
+            </li>
+            <li>
                 <a asp-area="" asp-controller="Home" asp-action="Privacy" 
                    class="sidebar-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Privacy" ? "active" : "")">
                     <i class="fas fa-shield-alt"></i>

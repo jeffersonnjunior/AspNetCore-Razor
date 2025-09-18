@@ -286,3 +286,124 @@ h6 { font-size: 1rem; }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--hover-color);
 }
+
+/* Estilos específicos para a seção de Vacinas */
+.vaccine-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-height: 280px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.vaccine-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para cards menores */
+.vaccine-card-small {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  min-height: 180px;
+  max-width: 200px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.vaccine-card-small:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.vaccine-icon {
+  margin-bottom: 1rem;
+}
+
+.vaccine-icon-small {
+  margin-bottom: 0.5rem;
+}
+
+.vaccine-card .card-title,
+.vaccine-card-small .card-title {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.vaccine-card .card-title {
+  margin-bottom: 0.75rem;
+}
+
+.vaccine-card-small .card-title {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.vaccine-card .card-text,
+.vaccine-card-small .card-text {
+  line-height: 1.4;
+}
+
+.vaccine-card .card-text {
+  font-size: 0.9rem;
+}
+
+.vaccine-card-small .card-text {
+  font-size: 0.75rem;
+}
+
+.vaccine-card .btn,
+.vaccine-card-small .btn {
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.vaccine-card .btn {
+  padding: 0.5rem 1.2rem;
+}
+
+.vaccine-card-small .btn {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.vaccine-card .btn:hover,
+.vaccine-card-small .btn:hover {
+  transform: scale(1.05);
+}
+
+.vaccine-card .btn:disabled,
+.vaccine-card-small .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.vaccine-card .btn:disabled:hover,
+.vaccine-card-small .btn:disabled:hover {
+  transform: none;
+}
+
+/* Responsividade para cards de vacinas */
+@media (max-width: 768px) {
+  .vaccine-card {
+    min-height: 250px;
+    margin-bottom: 1rem;
+  }
+  
+  .vaccine-card-small {
+    min-height: 160px;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .vaccine-icon i {
+    font-size: 2rem !important;
+  }
+  
+  .vaccine-icon-small i {
+    font-size: 1.5rem !important;
+  }
+}
