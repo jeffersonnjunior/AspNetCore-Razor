@@ -5,91 +5,75 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-lg-6">
-            <div class="card vaccine-form-card">
-                <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">
-                        <i class="fas fa-syringe me-2"></i>
-                        Cadastrar Nova Vacina
-                    </h5>
+            <!-- Título -->
+            <div class="form-title mb-4">
+                <h4>
+                    <i class="fas fa-syringe me-2 text-success"></i>
+                    Cadastrar Nova Vacina
+                </h4>
+            </div>
+
+            <!-- Formulário direto na tela -->
+            <form method="post" asp-action="Add" class="vaccine-form-simple" id="vaccine-form">
+                <!-- Nome da Vacina -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Nome da Vacina</label>
+                    <input type="text" class="form-control-vertical" id="name" name="Name" required>
                 </div>
-                <div class="card-body p-0">
-                    <form method="post" asp-action="Add">
-                        <!-- Nome da Vacina -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Nome da Vacina</label>
-                            <div class="form-field-content">
-                                <input type="text" class="form-control-custom" id="name" name="Name" required>
-                            </div>
-                        </div>
 
-                        <!-- Fabricante -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Fabricante</label>
-                            <div class="form-field-content">
-                                <input type="text" class="form-control-custom" id="manufacturer" name="Manufacturer">
-                            </div>
-                        </div>
-
-                        <!-- Lote -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Lote</label>
-                            <div class="form-field-content">
-                                <input type="text" class="form-control-custom" id="batch" name="Batch" required>
-                            </div>
-                        </div>
-
-                        <!-- Data de Fabricação -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Data de Fabricação</label>
-                            <div class="form-field-content">
-                                <input type="date" class="form-control-custom" id="manufacturingDate" name="ManufacturingDate">
-                            </div>
-                        </div>
-
-                        <!-- Data de Validade -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Data de Validade</label>
-                            <div class="form-field-content">
-                                <input type="date" class="form-control-custom" id="expirationDate" name="ExpirationDate" required>
-                            </div>
-                        </div>
-
-                        <!-- Doses Disponíveis -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Doses Disponíveis</label>
-                            <div class="form-field-content">
-                                <input type="number" class="form-control-custom" id="availableDoses" name="AvailableDoses" min="0">
-                            </div>
-                        </div>
-
-                        <!-- Temperatura de Armazenamento -->
-                        <div class="form-field-container">
-                            <label class="form-field-label">Temperatura de Armazenamento (°C)</label>
-                            <div class="form-field-content">
-                                <input type="number" class="form-control-custom" id="storageTemperature" name="StorageTemperature" step="0.1">
-                            </div>
-                        </div>
-
-                        <!-- Observações -->
-                        <div class="form-field-container border-bottom-0">
-                            <label class="form-field-label">Observações</label>
-                            <div class="form-field-content">
-                                <textarea class="form-control-custom" id="notes" name="Notes" rows="3" placeholder="Informações adicionais sobre a vacina"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <a href="@Url.Action("Index", "Vaccine")" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left me-1"></i>
-                                Voltar
-                            </a>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save me-1"></i>
-                                Salvar Vacina
-                            </button>
-                        </div>
-                    </form>
+                <!-- Fabricante -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Fabricante</label>
+                    <input type="text" class="form-control-vertical" id="manufacturer" name="Manufacturer">
                 </div>
+
+                <!-- Lote -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Lote</label>
+                    <input type="text" class="form-control-vertical" id="batch" name="Batch" required>
+                </div>
+
+                <!-- Data de Fabricação -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Data de Fabricação</label>
+                    <input type="date" class="form-control-vertical" id="manufacturingDate" name="ManufacturingDate">
+                </div>
+
+                <!-- Data de Validade -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Data de Validade</label>
+                    <input type="date" class="form-control-vertical" id="expirationDate" name="ExpirationDate" required>
+                </div>
+
+                <!-- Doses Disponíveis -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Doses Disponíveis</label>
+                    <input type="number" class="form-control-vertical" id="availableDoses" name="AvailableDoses" min="0">
+                </div>
+
+                <!-- Temperatura de Armazenamento -->
+                <div class="form-field-vertical">
+                    <label class="form-field-label-top">Temperatura de Armazenamento (°C)</label>
+                    <input type="number" class="form-control-vertical" id="storageTemperature" name="StorageTemperature" step="0.1">
+                </div>
+
+                <!-- Observações -->
+                <div class="form-field-vertical border-bottom-0">
+                    <label class="form-field-label-top">Observações</label>
+                    <textarea class="form-control-vertical" id="notes" name="Notes" rows="3" placeholder="Informações adicionais sobre a vacina"></textarea>
+                </div>
+            </form>
+
+            <!-- Botões de ação fora do formulário -->
+            <div class="form-actions-outside mt-3">
+                <a href="@Url.Action("Index", "Vaccine")" class="btn btn-secondary btn-sm btn-rounded">
+                    <i class="fas fa-arrow-left me-1"></i>
+                    Voltar
+                </a>
+                <button type="submit" form="vaccine-form" class="btn btn-success btn-sm btn-rounded">
+                    <i class="fas fa-save me-1"></i>
+                    Salvar Vacina
+                </button>
             </div>
         </div>
     </div>
