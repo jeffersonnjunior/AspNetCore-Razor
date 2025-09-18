@@ -1,0 +1,290 @@
+﻿@page
+@model WebUI.Pages.Pdfs.CreateVaccinePdfModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Relatório de Vacinas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 15px;
+        }
+        
+        .header h1 {
+            color: #27ae60;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .header p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .report-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .info-item {
+            font-weight: bold;
+        }
+        
+        .vaccines-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        .vaccines-table th {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+        
+        .vaccines-table td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .vaccines-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .vaccines-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .status-valid {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .status-expired {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .status-warning {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .summary {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+        
+        .summary-item {
+            text-align: center;
+        }
+        
+        .summary-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        .summary-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+            }
+            .header {
+                page-break-after: avoid;
+            }
+            .vaccines-table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho do Relatório -->
+    <div class="header">
+        <h1>🏥 Sistema de Saúde - Relatório de Vacinas</h1>
+        <p>Controle e Monitoramento de Estoque de Vacinas</p>
+    </div>
+
+    <!-- Informações do Relatório -->
+    <div class="report-info">
+        <div class="info-item">
+            <strong>Data do Relatório:</strong> @DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+        </div>
+        <div class="info-item">
+            <strong>Responsável:</strong> Sistema Automatizado
+        </div>
+        <div class="info-item">
+            <strong>Total de Vacinas:</strong> 8 itens
+        </div>
+    </div>
+
+    <!-- Tabela de Vacinas -->
+    <table class="vaccines-table">
+        <thead>
+            <tr>
+                <th>Nome da Vacina</th>
+                <th>Fabricante</th>
+                <th>Lote</th>
+                <th>Data Fabricação</th>
+                <th>Data Validade</th>
+                <th>Doses</th>
+                <th>Temp. (°C)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>CoronaVac</strong></td>
+                <td>Sinovac Biotech</td>
+                <td>CV2024001</td>
+                <td>15/01/2024</td>
+                <td>15/01/2026</td>
+                <td>500</td>
+                <td>2-8°C</td>
+                <td><span class="status-valid">✓ Válida</span></td>
+            </tr>
+            <tr>
+                <td><strong>Pfizer-BioNTech</strong></td>
+                <td>Pfizer Inc.</td>
+                <td>PF2024002</td>
+                <td>20/02/2024</td>
+                <td>20/02/2026</td>
+                <td>300</td>
+                <td>-70°C</td>
+                <td><span class="status-valid">✓ Válida</span></td>
+            </tr>
+            <tr>
+                <td><strong>AstraZeneca</strong></td>
+                <td>AstraZeneca PLC</td>
+                <td>AZ2024003</td>
+                <td>10/03/2024</td>
+                <td>10/12/2025</td>
+                <td>150</td>
+                <td>2-8°C</td>
+                <td><span class="status-warning">⚠ Vence em 3 meses</span></td>
+            </tr>
+            <tr>
+                <td><strong>Hepatite B</strong></td>
+                <td>GSK</td>
+                <td>HB2023001</td>
+                <td>05/06/2023</td>
+                <td>05/06/2025</td>
+                <td>200</td>
+                <td>2-8°C</td>
+                <td><span class="status-valid">✓ Válida</span></td>
+            </tr>
+            <tr>
+                <td><strong>Tríplice Viral (MMR)</strong></td>
+                <td>Merck & Co.</td>
+                <td>MMR2024004</td>
+                <td>12/04/2024</td>
+                <td>12/04/2027</td>
+                <td>80</td>
+                <td>2-8°C</td>
+                <td><span class="status-valid">✓ Válida</span></td>
+            </tr>
+            <tr>
+                <td><strong>Febre Amarela</strong></td>
+                <td>Bio-Manguinhos</td>
+                <td>FA2023005</td>
+                <td>18/08/2023</td>
+                <td>18/08/2024</td>
+                <td>25</td>
+                <td>2-8°C</td>
+                <td><span class="status-expired">✗ Vencida</span></td>
+            </tr>
+            <tr>
+                <td><strong>Influenza (Gripe)</strong></td>
+                <td>Sanofi Pasteur</td>
+                <td>IN2024006</td>
+                <td>01/03/2024</td>
+                <td>01/03/2025</td>
+                <td>400</td>
+                <td>2-8°C</td>
+                <td><span class="status-valid">✓ Válida</span></td>
+            </tr>
+            <tr>
+                <td><strong>Pneumocócica 13</strong></td>
+                <td>Pfizer Inc.</td>
+                <td>PN2024007</td>
+                <td>22/05/2024</td>
+                <td>22/05/2026</td>
+                <td>120</td>
+                <td>2-8°C</td>
+                <td><span class="status-valid">✓ Válida</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Resumo Estatístico -->
+    <div class="summary">
+        <div class="summary-item">
+            <div class="summary-number">8</div>
+            <div class="summary-label">Total de Vacinas</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-number">1,775</div>
+            <div class="summary-label">Doses Disponíveis</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-number">6</div>
+            <div class="summary-label">Vacinas Válidas</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-number">1</div>
+            <div class="summary-label">Vacinas Vencidas</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-number">1</div>
+            <div class="summary-label">Alertas</div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <p>Relatório gerado automaticamente pelo Sistema de Gestão de Vacinas</p>
+        <p>Data de impressão: @DateTime.Now.ToString("dd/MM/yyyy às HH:mm:ss") | Documento confidencial</p>
+    </div>
+</body>
+</html>

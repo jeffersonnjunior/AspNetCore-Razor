@@ -5,3 +5,4 @@
 /WebUI/bin/Debug/net9.0
 /WebUI/obj
 /.vs/AspNetCore-Razor
+/Core/obj
