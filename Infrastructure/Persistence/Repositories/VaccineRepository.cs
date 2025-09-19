@@ -3,7 +3,7 @@ using Core.Interfaces;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories;
+namespace Infrastructure.Persistence.Repositories;
 
 public class VaccineRepository : IVaccineRepository
 {
