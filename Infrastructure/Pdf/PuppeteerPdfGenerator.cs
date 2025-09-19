@@ -1,12 +1,14 @@
 ﻿using Infrastructure.Interfaces.IPdf;
 using PuppeteerSharp;
 
-namespace Infrastructure.Pdf.GeneratorPdf;
+namespace Infrastructure.Pdf;
 
 public class PuppeteerPdfGenerator : IPdfGenerator
 {
     public async Task<byte[]> GeneratePdfAsync(string html)
     {
+        await new BrowserFetcher().DownloadAsync();
+
         using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
         using var page = await browser.NewPageAsync();
 

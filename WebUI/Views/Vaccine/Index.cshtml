@@ -1,9 +1,7 @@
 @{
     ViewData["Title"] = "Vacinas";
-}                        <a href="/Pdfs/CreateVaccinePdf" target="_blank" class="btn btn-primary btn-sm">
-                            <i class="fas fa-print me-1"></i>
-                            Imprimir
-                        </a>iv class="container-fluid">
+}
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <h2 class="mb-3">Sistema de Vacinas</h2>
@@ -41,11 +39,10 @@
                     <h6 class="card-title mb-2">Imprimir Vacinas</h6>
                     <p class="card-text text-muted small mb-2">Gere relatórios das vacinas</p>
                     <div class="mt-auto">
-                        <button class="btn btn-primary btn-sm" disabled>
+                        <a href="@Url.Action("PrintVaccineReport", "Vaccine")" target="_blank" class="btn btn-primary btn-sm">
                             <i class="fas fa-print me-1"></i>
                             Imprimir
-                        </button>
-                        <small class="d-block text-muted mt-1" style="font-size: 0.7rem;">Em desenvolvimento</small>
+                        </a>
                     </div>
                 </div>
             </div>
