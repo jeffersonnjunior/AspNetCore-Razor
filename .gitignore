@@ -9,3 +9,5 @@
 /Infrastructure/obj
 /Infrastructure/bin/Debug/net8.0
 /.vs/ProjectEvaluation
+/Core/bin/Debug/net9.0
+/Infrastructure/bin/Debug/net9.0
