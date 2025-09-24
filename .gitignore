@@ -11,3 +11,4 @@
 /.vs/ProjectEvaluation
 /Core/bin/Debug/net9.0
 /Infrastructure/bin/Debug/net9.0
+/obj/Docker
