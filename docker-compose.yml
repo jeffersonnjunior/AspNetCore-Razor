@@ -6,13 +6,13 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: •	clinicmanager
+      POSTGRES_DB: clinicmanager
     ports:
       - "5434:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d •	clinicmanager"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d clinicmanager"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -29,21 +29,19 @@ services:
     command: >
       sh -c "
       echo '⏳ Aguardando PostgreSQL ficar disponível...';
-      until pg_isready -h postgres -U postgres -d •	clinicmanager; do sleep 2; done;
+      until pg_isready -h postgres -U postgres -d clinicmanager; do sleep 2; done;
       echo '🛠️ Aplicando migrations...';
       dotnet ef database update --project ../Infrastructure --startup-project .
       "
 
-  api:
+  webui:
     build:
       context: .
-      dockerfile: Api/Dockerfile
+      dockerfile: WebUI/Dockerfile
     ports:
       - "5000:5000"
     depends_on:
       postgres:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Development

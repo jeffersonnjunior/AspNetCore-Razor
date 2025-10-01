@@ -2,6 +2,26 @@ using Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+bool isRunningInContainer = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    if (isRunningInContainer)
+    {
+
+        options.ListenAnyIP(5000);
+    }
+    else
+    {
+
+        options.ListenAnyIP(5001, listenOptions =>
+        {
+            listenOptions.UseHttps();
+        });
+    }
+});
+
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.DependencyInjectionInfrastructure();
