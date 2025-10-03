@@ -9,7 +9,22 @@ public class PuppeteerPdfGenerator : IPdfGenerator
     {
         await new BrowserFetcher().DownloadAsync();
 
-        using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+        var launchOptions = new LaunchOptions 
+        { 
+            Headless = true,
+            Args = new[]
+            {
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-accelerated-2d-canvas",
+                "--no-first-run",
+                "--no-zygote",
+                "--disable-gpu"
+            }
+        };
+
+        using var browser = await Puppeteer.LaunchAsync(launchOptions);
         using var page = await browser.NewPageAsync();
 
         await page.SetContentAsync(html);
