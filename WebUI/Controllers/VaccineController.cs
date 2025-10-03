@@ -45,30 +45,23 @@ namespace WebUI.Controllers
                                 DateTime? manufacturingDate, DateTime? expirationDate,
                                 int? availableDoses, decimal? storageTemperature, string notes)
         {
-            // Logic to save the vaccine will be implemented in the future
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public async Task<IActionResult> PrintVaccineReport()
         {
-            // 1. Monte o modelo de dados (exemplo, ajuste conforme sua lógica)
             var model = new CreateVaccinePdfModel
             {
-                // Preencha as propriedades do modelo conforme necessário
             };
 
-            // 2. Renderize o Razor Page como HTML
             string html = await RenderViewToStringAsync("/Pages/Pdfs/CreateVaccinePdf.cshtml", model);
 
-            // 3. Gere o PDF
             var pdfBytes = await _pdfGenerator.GeneratePdfAsync(html);
 
-            // 4. Retorne o PDF como arquivo
             return File(pdfBytes, "application/pdf", "RelatorioVacinas.pdf");
         }
 
-        // Método utilitário para renderizar Razor Page como string
         private async Task<string> RenderViewToStringAsync(string viewPath, object model)
         {
             var actionContext = new ActionContext(HttpContext, RouteData, ControllerContext.ActionDescriptor);
