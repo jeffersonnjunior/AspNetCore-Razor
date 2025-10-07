@@ -27,7 +27,6 @@ public class VaccineService : IVaccineService
             throw new ArgumentException("A data da vacina não pode ser futura.");
         }
 
-        // Regra de negócio que depende de dados externos
         if (nameAlreadyExists)
         {
             throw new InvalidOperationException($"Já existe uma vacina com o nome '{vaccine.Name}'.");
