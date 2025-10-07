@@ -1,3 +1,5 @@
+using Core.DTOs;
+using Core.Interfaces.UseCases;
 using Infrastructure.Interfaces.IPdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding; 
@@ -10,6 +12,7 @@ namespace WebUI.Controllers
 {
     public class VaccineController : Controller
     {
+        private readonly ICreateVaccineUseCase _createVaccineUseCase;
         private readonly IPdfGenerator _pdfGenerator;
         private readonly IRazorViewEngine _viewEngine;
         private readonly ITempDataProvider _tempDataProvider;
@@ -17,12 +20,14 @@ namespace WebUI.Controllers
         private readonly ILogger<VaccineController> _logger;
 
         public VaccineController(
+            ICreateVaccineUseCase createVaccineUseCase,
             IPdfGenerator pdfGenerator,
             IRazorViewEngine viewEngine,
             ITempDataProvider tempDataProvider,
             IServiceProvider serviceProvider,
             ILogger<VaccineController> logger)
         {
+            _createVaccineUseCase = createVaccineUseCase;
             _pdfGenerator = pdfGenerator;
             _viewEngine = viewEngine;
             _tempDataProvider = tempDataProvider;
@@ -41,11 +46,33 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string name, string manufacturer, string batch,
+        public async Task<IActionResult> Add(string name, string manufacturer, string batch,
                                 DateTime? manufacturingDate, DateTime? expirationDate,
                                 int? availableDoses, decimal? storageTemperature, string notes)
         {
-            return RedirectToAction("Index");
+            try
+            {
+                var createVaccineDto = new CreateVaccineDto
+                {
+                    Name = name ?? string.Empty,
+                    Manufacturer = manufacturer ?? string.Empty,
+                    Batch = batch ?? string.Empty,
+                    Date = manufacturingDate ?? DateTime.Now,
+                    ExpirationDate = expirationDate,
+                    AvailableDoses = availableDoses,
+                    StorageTemperature = storageTemperature,
+                    Description = notes ?? string.Empty
+                };
+
+                await _createVaccineUseCase.ExecuteAsync(createVaccineDto);
+                
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao criar vacina");
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]

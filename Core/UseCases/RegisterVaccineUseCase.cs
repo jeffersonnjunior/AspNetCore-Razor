@@ -14,7 +14,6 @@ public class RegisterVaccineUseCase
 
     public async Task ExecuteAsync(Vaccine vaccine)
     {
-        // Add business rules here if needed
         await _vaccineService.RegisterVaccineAsync(vaccine);
     }
 }

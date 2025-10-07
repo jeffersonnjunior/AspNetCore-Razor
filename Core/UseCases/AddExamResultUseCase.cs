@@ -14,7 +14,6 @@ public class AddExamResultUseCase
 
     public async Task ExecuteAsync(ExamResult examResult)
     {
-        // Add business rules here if needed
         await _examResultService.AddExamResultAsync(examResult);
     }
 }
